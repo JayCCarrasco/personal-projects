@@ -1,0 +1,29 @@
+{
+  "name": "book-directory",
+  "version": "1.0.0",
+  "description": "book directory application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JayCCarrasco/personal-projects.git#main"
+  },
+  "keywords": [
+    "nodejs",
+    "server",
+    "app",
+    "books",
+    "directory"
+  ],
+  "author": "Juan Carlos del Pozo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JayCCarrasco/personal-projects/issues"
+  },
+  "homepage": "https://github.com/JayCCarrasco/personal-projects/tree/main#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
