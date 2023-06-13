@@ -19,3 +19,7 @@ Content-Type: application/json
     "title": "Pinocho fue a pescar",
     "pages": 765
 }
+
+###
+
+DELETE http://localhost:3000/api/books/novel/3 HTTP/1.1

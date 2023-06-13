@@ -41,4 +41,15 @@ novelRouter.put(('/'), (req, res) => {
     res.send(novel);
 })
 
+//delete method
+novelRouter.delete(('/:id'), (req, res) => {
+    let id = req.params.id
+    let index = novel.findIndex(novel => novel.id == id)
+    if(index === -1){
+        return res.status(404).send(`The course with index ${id} could not be found`);
+    }
+    novel.splice(index,1);
+    res.send(novel);
+})
+
 module.exports = novelRouter;
