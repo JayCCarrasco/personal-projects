@@ -1,0 +1,148 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/DMux8Way.hdl
+
+/**
+ * 8-way demultiplexor:
+ * {a, b, c, d, e, f, g, h} = {in, 0, 0, 0, 0, 0, 0, 0} if sel == 000
+ *                            {0, in, 0, 0, 0, 0, 0, 0} if sel == 001
+ *                            etc.
+ *                            {0, 0, 0, 0, 0, 0, 0, in} if sel == 111
+ */
+
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+
+    PARTS:
+	/*out = a*/
+    /*OR out = a1*/
+	Nand (a = sel[1], b = sel[1], out = a11);
+	Nand (a = sel[2], b = sel[2], out = a12);
+	Nand (a = a11, b = a12, out = a1);
+	
+	/*NOR out = a2*/
+	Nand (a = sel[0], b = sel[0], out = a21);
+	Nand (a = a1, b = a1, out = a22);
+	Nand (a = a21, b = a22, out = a23);
+	Nand (a = a23, b = a23, out = a2);
+	
+	/*AND out = a*/
+	Nand (a = in, b = a2, out = aa);
+	Nand (a = aa, b = aa, out = a);
+	
+	/*out = b*/
+	/*NOR out = b1*/
+	Nand (a = sel[1], b = sel[1], out = b11);
+	Nand (a = sel[2], b = sel[2], out = b12);
+	Nand (a = b11, b = b12, out = b13);
+	Nand (a = b13, b = b13, out = b1);
+	
+	/*AND out = b2*/
+	Nand (a = sel[0], b = b1, out = b21);
+	Nand (a = b21, b = b21, out = b2);
+	
+	/*AND out = b*/
+	Nand (a = in, b = b2, out = bb);
+	Nand (a = bb, b = bb, out = b);
+	
+	/*out = c*/
+	/*NOR out = c1*/
+	Nand (a = sel[0], b = sel[0], out = c11);
+	Nand (a = sel[2], b = sel[2], out = c12);
+	Nand (a = c11, b = c12, out = c13);
+	Nand (a = c13, b = c13, out = c1);
+	
+	/*AND out = c2*/
+	Nand (a = c1, b = sel[1], out = c21);
+	Nand (a = c21, b = c21, out = c2);
+	
+	/*AND out = c*/
+	Nand (a = in, b = c2, out = cc);
+	Nand (a = cc, b = cc, out = c);
+	
+	/*out = d*/
+	/*AND out = d12*/
+	Nand (a = sel[0], b = sel[1], out = d11);
+	Nand (a = d11, b = d11, out = d12);
+	
+	/*NOT out = d1*/
+	Nand (a = d12, b = d12, out = d1);
+	
+	/*NOR out = d2*/
+	Nand (a = d1, b = d1, out = d21);
+	Nand (a = sel[2], b = sel[2], out = d22);
+	Nand (a = d21, b = d22, out = d23);
+	Nand (a = d23, b = d23, out = d2);
+	
+	/*AND out = d*/
+	Nand (a = in, b = d2, out = dd);
+	Nand (a = dd, b = dd, out = d);
+	
+	/*out = e*/
+	/*NOR out = e1*/
+	Nand (a = sel[0], b = sel[0], out = e11);
+	Nand (a = sel[1], b = sel[1], out = e12);
+	Nand (a = e11, b = e12, out = e13);
+	Nand (a = e13, b = e13, out = e1);
+	
+	/*AND out = e2*/
+	Nand (a = e1, b = sel[2], out = e21);
+	Nand (a = e21, b = e21, out = e2);
+	
+	/*AND out = e*/
+	Nand (a = in, b = e2, out = ee);
+	Nand (a = ee, b = ee, out = e);
+	
+	/*out = f*/
+	/*AND out = f12*/
+	Nand (a = sel[0], b = sel[2], out = f11);
+	Nand (a = f11, b = f11, out = f12);
+	
+	/*NOT out = f1*/
+	Nand (a = f12, b = f12, out = f1);
+	
+	/*NOR out = f2*/
+	Nand (a = sel[1], b = sel[1], out = f21);
+	Nand (a = f1, b = f1, out = f22);
+	Nand (a = f21, b = f22, out = f23);
+	Nand (a = f23, b = f23, out = f2);
+	
+	/*AND out = f*/
+	Nand (a = in, b = f2, out = ff);
+	Nand (a = ff, b = ff, out = f);
+	
+	/*out = g*/
+	/*AND out = g12*/
+	Nand (a = sel[1], b = sel[2], out = g11);
+	Nand (a = g11, b = g11, out = g12);
+	
+	/*NOT out = g1*/
+	Nand (a = g12, b = g12, out = g1);
+	
+	/*NOR out = g2*/
+	Nand (a = g1, b = g1, out = g21);
+	Nand (a = sel[0], b = sel[0], out = g22);
+	Nand (a = g21, b = g22, out = g23);
+	Nand (a = g23, b = g23, out = g2);
+	
+	/*AND out = g*/
+	Nand (a = in, b = g2, out = gg);
+	Nand (a = gg, b = gg, out = g);
+	
+	/*out = h*/
+	/*AND out = h1*/
+	Nand (a = sel[0], b = sel[1], out = h11);
+	Nand (a = h11, b = h11, out = h1);
+	
+	/*AND out = h2*/
+	Nand (a = h1, b = sel[2], out = h21);
+	Nand (a = h21, b = h21, out = h2);
+	
+	/*AND out = h*/
+	Nand (a = in, b = h2, out = hh);
+	Nand (a = hh, b = hh, out = h);
+	
+	
+}
