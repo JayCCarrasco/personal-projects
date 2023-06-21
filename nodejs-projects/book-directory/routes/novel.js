@@ -1,3 +1,17 @@
+const express = require('express');
+const novelRouter = express.Router();
+const {getAllBooks, createBook} = require('../controllers/novels');
+
+novelRouter.route('/').get(getAllBooks).post(createBook);
+
+module.exports = novelRouter;
+
+
+
+
+
+
+/*OLD CODE
 //import express and novels
 const express = require('express');
 const {novel} = require('../data/books').infoBooks;
@@ -53,3 +67,4 @@ novelRouter.delete(('/:id'), (req, res) => {
 })
 
 module.exports = novelRouter;
+*/

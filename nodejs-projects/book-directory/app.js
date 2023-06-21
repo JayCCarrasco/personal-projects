@@ -1,12 +1,16 @@
 //Import express
 const express = require('express');
-const app = express();  //Instance for express
-
-//Routers import and use
+const app = express();  //Instance for express.
 const novelRouter = require('./routes/novel');
-const theatreRouter = require('./routes/theatre');
+const connectDB = require('./db/connect');
+require('dotenv').config();
+
+//moddleware
+app.use(express.json());
+
+//const theatreRouter = require('./routes/theatre');
 app.use('/api/books/novel', novelRouter);
-app.use('/api/books/theatre', theatreRouter);
+//app.use('/api/books/theatre', theatreRouter);
 
 //getting req, res in main directory /
 app.get(('/'), (req, res) => {
@@ -18,6 +22,13 @@ app.get(('/'), (req, res) => {
 //callback function returning console.log
 const PORT = 3000;
 
-app.listen(PORT, () => {
-    console.log(`server listening in port ${PORT}`);
-})
+const start = async () => {
+    try {
+        await connectDB(process.env.MONGO_URI);
+        app.listen(PORT, console.log(`server listening in port ${PORT}`));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+start();

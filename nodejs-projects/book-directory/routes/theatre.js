@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const {theatre} = require('../data/books').infoBooks;
 
 //router y middleware
@@ -47,4 +47,4 @@ theatreRouter.delete(('/:id'), (req, res) => {
 
 })
 
-module.exports = theatreRouter;
+module.exports = theatreRouter;*/
