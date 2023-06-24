@@ -1,8 +1,9 @@
 const express = require('express');
 const novelRouter = express.Router();
-const {getAllBooks, createBook} = require('../controllers/novels');
+const {getAllBooks, createBook, getBook} = require('../controllers/novels');
 
 novelRouter.route('/').get(getAllBooks).post(createBook);
+novelRouter.route('/:author').get(getBook)
 
 module.exports = novelRouter;
 
