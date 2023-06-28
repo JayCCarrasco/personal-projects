@@ -1,0 +1,182 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux16.hdl
+
+/**
+ * 16-bit multiplexor: 
+ * for i = 0..15 out[i] = a[i] if sel == 0 
+ *                        b[i] if sel == 1
+ */
+
+CHIP Mux16 {
+    IN a[16], b[16], sel;
+    OUT out[16];
+
+    PARTS:
+	/*
+	Nand(a = sel, b = sel, out = aa0);
+	Nand(a = a[0], b = aa0, out = bb00);
+	Nand(a = bb00, b = bb00, out = bb0);
+	Nand(a = sel, b = b[0], out = cc00);
+	Nand(a = cc00, b = cc00, out = cc0);
+	Nand(a=bb0, b = bb0, out = bb000);
+	Nand(a=cc0, b = cc0, out = cc000);
+	Nand(a = bb000, b = cc000, out = out[0]);
+	
+	Nand(a = sel, b = sel, out = aa1);
+	Nand(a = a[1], b = aa1, out = bb11);
+	Nand(a = bb11, b = bb11, out = bb1);
+	Nand(a = sel, b = b[1], out = cc11);
+	Nand(a = cc11, b = cc11, out = cc1);
+	Nand(a=bb1, b = bb1, out = bb111);
+	Nand(a=cc1, b = cc1, out = cc111);
+	Nand(a = bb111, b = cc111, out = out[1]);
+	
+	Nand(a = sel, b = sel, out = aa2);
+	Nand(a = a[2], b = aa2, out = bb22);
+	Nand(a = bb22, b = bb22, out = bb2);
+	Nand(a = sel, b = b[2], out = cc22);
+	Nand(a = cc22, b = cc22, out = cc2);
+	Nand(a=bb2, b = bb2, out = bb222);
+	Nand(a=cc2, b = cc2, out = cc222);
+	Nand(a = bb222, b = cc222, out = out[2]);
+	
+	Nand(a = sel, b = sel, out = aa3);
+	Nand(a = a[3], b = aa3, out = bb33);
+	Nand(a = bb33, b = bb33, out = bb3);
+	Nand(a = sel, b = b[3], out = cc33);
+	Nand(a = cc33, b = cc33, out = cc3);
+	Nand(a=bb3, b = bb3, out = bb333);
+	Nand(a=cc3, b = cc3, out = cc333);
+	Nand(a = bb333, b = cc333, out = out[3]);
+	
+	Nand(a = sel, b = sel, out = aa4);
+	Nand(a = a[4], b = aa4, out = bb44);
+	Nand(a = bb44, b = bb44, out = bb4);
+	Nand(a = sel, b = b[4], out = cc44);
+	Nand(a = cc44, b = cc44, out = cc4);
+	Nand(a=bb4, b = bb4, out = bb444);
+	Nand(a=cc4, b = cc4, out = cc444);
+	Nand(a = bb444, b = cc444, out = out[4]);
+	
+	Nand(a = sel, b = sel, out = aa5);
+	Nand(a = a[5], b = aa5, out = bb55);
+	Nand(a = bb55, b = bb55, out = bb5);
+	Nand(a = sel, b = b[5], out = cc55);
+	Nand(a = cc55, b = cc55, out = cc5);
+	Nand(a=bb5, b = bb5, out = bb555);
+	Nand(a=cc5, b = cc5, out = cc555);
+	Nand(a = bb555, b = cc555, out = out[5]);
+	
+	Nand(a = sel, b = sel, out = aa6);
+	Nand(a = a[6], b = aa6, out = bb66);
+	Nand(a = bb66, b = bb66, out = bb6);
+	Nand(a = sel, b = b[6], out = cc66);
+	Nand(a = cc66, b = cc66, out = cc6);
+	Nand(a=bb6, b = bb6, out = bb666);
+	Nand(a=cc6, b = cc6, out = cc666);
+	Nand(a = bb666, b = cc666, out = out[6]);
+	
+	Nand(a = sel, b = sel, out = aa7);
+	Nand(a = a[7], b = aa7, out = bb77);
+	Nand(a = bb77, b = bb77, out = bb7);
+	Nand(a = sel, b = b[7], out = cc77);
+	Nand(a = cc77, b = cc77, out = cc7);
+	Nand(a=bb7, b = bb7, out = bb777);
+	Nand(a=cc7, b = cc7, out = cc777);
+	Nand(a = bb777, b = cc777, out = out[7]);
+	
+	Nand(a = sel, b = sel, out = aa8);
+	Nand(a = a[8], b = aa8, out = bb88);
+	Nand(a = bb88, b = bb88, out = bb8);
+	Nand(a = sel, b = b[8], out = cc88);
+	Nand(a = cc88, b = cc88, out = cc8);
+	Nand(a=bb8, b = bb8, out = bb888);
+	Nand(a=cc8, b = cc8, out = cc888);
+	Nand(a = bb888, b = cc888, out = out[8]);
+	
+	Nand(a = sel, b = sel, out = aa9);
+	Nand(a = a[9], b = aa9, out = bb99);
+	Nand(a = bb99, b = bb99, out = bb9);
+	Nand(a = sel, b = b[9], out = cc99);
+	Nand(a = cc99, b = cc99, out = cc9);
+	Nand(a=bb9, b = bb9, out = bb999);
+	Nand(a=cc9, b = cc9, out = cc999);
+	Nand(a = bb999, b = cc999, out = out[9]);
+	
+	Nand(a = sel, b = sel, out = aa10);
+	Nand(a = a[10], b = aa10, out = bb1010);
+	Nand(a = bb1010, b = bb1010, out = bb10);
+	Nand(a = sel, b = b[10], out = cc1010);
+	Nand(a = cc1010, b = cc1010, out = cc10);
+	Nand(a=bb10, b = bb10, out = bb101010);
+	Nand(a=cc10, b = cc10, out = cc101010);
+	Nand(a = bb101010, b = cc101010, out = out[10]);
+	
+	Nand(a = sel, b = sel, out = aa11);
+	Nand(a = a[11], b = aa11, out = bb1111);
+	Nand(a = bb1111, b = bb1111, out = bb11);
+	Nand(a = sel, b = b[11], out = cc1111);
+	Nand(a = cc1111, b = cc1111, out = cc11);
+	Nand(a=bb11, b = bb11, out = bb111111);
+	Nand(a=cc11, b = cc11, out = cc111111);
+	Nand(a = bb111111, b = cc111111, out = out[11]);
+	
+	Nand(a = sel, b = sel, out = aa12);
+	Nand(a = a[12], b = aa12, out = bb1212);
+	Nand(a = bb1212, b = bb1212, out = bb12);
+	Nand(a = sel, b = b[12], out = cc1212);
+	Nand(a = cc1212, b = cc1212, out = cc12);
+	Nand(a=bb12, b = bb12, out = bb121212);
+	Nand(a=cc12, b = cc12, out = cc121212);
+	Nand(a = bb121212, b = cc121212, out = out[12]);
+	
+	Nand(a = sel, b = sel, out = aa13);
+	Nand(a = a[13], b = aa13, out = bb1313);
+	Nand(a = bb1313, b = bb1313, out = bb13);
+	Nand(a = sel, b = b[13], out = cc1313);
+	Nand(a = cc1313, b = cc1313, out = cc13);
+	Nand(a=bb13, b = bb13, out = bb131313);
+	Nand(a=cc13, b = cc13, out = cc131313);
+	Nand(a = bb131313, b = cc131313, out = out[13]);
+	
+	Nand(a = sel, b = sel, out = aa14);
+	Nand(a = a[14], b = aa14, out = bb1414);
+	Nand(a = bb1414, b = bb1414, out = bb14);
+	Nand(a = sel, b = b[14], out = cc1414);
+	Nand(a = cc1414, b = cc1414, out = cc14);
+	Nand(a=bb14, b = bb14, out = bb141414);
+	Nand(a=cc14, b = cc14, out = cc141414);
+	Nand(a = bb141414, b = cc141414, out = out[14]);
+
+	Nand(a = sel, b = sel, out = aa15);
+	Nand(a = a[15], b = aa15, out = bb1515);
+	Nand(a = bb1515, b = bb1515, out = bb15);
+	Nand(a = sel, b = b[15], out = cc1515);
+	Nand(a = cc1515, b = cc1515, out = cc15);
+	Nand(a=bb15, b = bb15, out = bb151515);
+	Nand(a=cc15, b = cc15, out = cc151515);
+	Nand(a = bb151515, b = cc151515, out = out[15]);
+	*/
+	
+	
+	
+    Mux(a=a[0], b=b[0], sel=sel, out=out[0]);
+    Mux(a=a[1], b=b[1], sel=sel, out=out[1]);
+    Mux(a=a[2], b=b[2], sel=sel, out=out[2]);
+    Mux(a=a[3], b=b[3], sel=sel, out=out[3]);
+    Mux(a=a[4], b=b[4], sel=sel, out=out[4]);
+    Mux(a=a[5], b=b[5], sel=sel, out=out[5]);
+    Mux(a=a[6], b=b[6], sel=sel, out=out[6]);
+    Mux(a=a[7], b=b[7], sel=sel, out=out[7]);
+    Mux(a=a[8], b=b[8], sel=sel, out=out[8]);
+    Mux(a=a[9], b=b[9], sel=sel, out=out[9]);
+    Mux(a=a[10], b=b[10], sel=sel, out=out[10]);
+    Mux(a=a[11], b=b[11], sel=sel, out=out[11]);
+    Mux(a=a[12], b=b[12], sel=sel, out=out[12]);
+    Mux(a=a[13], b=b[13], sel=sel, out=out[13]);
+    Mux(a=a[14], b=b[14], sel=sel, out=out[14]);
+    Mux(a=a[15], b=b[15], sel=sel, out=out[15]);
+	
+}
