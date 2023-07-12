@@ -15,6 +15,21 @@ Node* addNode(int data, Node* current){
     return newNode;
 }
 
+void addNodePos(int data, int position, Node* head){
+    Node* newNode = malloc(sizeof(Node));
+    Node* temp = head;
+
+    newNode->data = data;
+    while (position != 2){
+        temp = temp->next;
+        position--;
+    }
+
+    newNode->next = temp->next;
+    temp->next = newNode;
+
+}
+
 int main(){
     Node* head = malloc(sizeof(Node));
     head->data = 10;
@@ -31,6 +46,15 @@ int main(){
         printf("Insert 0 if you want to exit: ");
         scanf("%d", &exit);
     }
+
+    int position = 0;
+    printf("Insert the data: ");
+    scanf("%d", &data);
+    printf("Insert the position: ");
+    scanf("%d", &position);
+
+    addNodePos(data, position, head);
+
 
     while(head!=NULL){
         printf("%d ", head->data);

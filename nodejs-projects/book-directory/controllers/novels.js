@@ -1,3 +1,4 @@
+const book = require('../models/book');
 const bookModel = require('../models/book')
 
 const getAllBooks = async (req, res) => {
@@ -34,4 +35,32 @@ const getBook = async (req, res) => {
   }
 }
 
-module.exports = {getAllBooks, createBook, getBook};
+const modBook = async (req, res) => {
+  try {
+    //console.log('trying')
+    const titleToLookFor = req.params.title;
+    const result = await bookModel.findOneAndReplace({title:titleToLookFor}, req.body);
+    if (!result){
+      return res.status(404).send(`No book with title ${title}`);
+    }
+    res.status(200).json({result});
+  }catch(error){
+    //console.log('not trying')
+    res.status(500).json({msg:error});
+  }
+}
+
+const delBook = async (req, res) => {
+  try {
+    const titleDelete = req.params.title
+    const result = await bookModel.findOneAndRemove({title:titleDelete});
+    if(!result){
+      return res.status(404).send(`No book with title ${title}`);
+    }
+    res.status(200).json({result});
+  } catch(error) {
+    res.status(500).json({msg:error});
+  }
+}
+
+module.exports = {getAllBooks, createBook, getBook, modBook, delBook};
