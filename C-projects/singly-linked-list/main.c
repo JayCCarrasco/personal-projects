@@ -47,7 +47,7 @@ int main(){
         scanf("%d", &exit);
     }
 
-    int position = 0;
+    int position = 0;-
     printf("Insert the data: ");
     scanf("%d", &data);
     printf("Insert the position: ");
