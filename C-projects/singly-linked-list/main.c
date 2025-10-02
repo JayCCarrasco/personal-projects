@@ -30,6 +30,16 @@ void addNodePos(int data, int position, Node* head){
 
 }
 
+void addNodeBegin(Node** headB, int data){
+    Node* temp = malloc(sizeof(Node));
+    if(temp == NULL){
+        printf("Error in memory allocation\n");
+    }
+    temp->data = data;
+    temp->next = *headB;
+    *headB = temp;
+}
+
 int main(){
     Node* head = malloc(sizeof(Node));
     head->data = 10;
@@ -47,19 +57,24 @@ int main(){
         scanf("%d", &exit);
     }
 
-    int position = 0;-
+    int position = 0;
     printf("Insert the data: ");
     scanf("%d", &data);
     printf("Insert the position: ");
     scanf("%d", &position);
 
-    addNodePos(data, position, head);
-
+    if (position == 1){
+        addNodeBegin(&head, data);
+    } else {
+        addNodePos(data, position, head);
+    }
+  
 
     while(head!=NULL){
         printf("%d ", head->data);
         head=head->next;
     }
+
 
     return 0;
 }

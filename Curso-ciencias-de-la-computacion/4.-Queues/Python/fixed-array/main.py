@@ -1,7 +1,6 @@
-
 class Queue:
     def __init__(self):
-        self.data = [0,0,0,0,0,0,0,0] #8 spaces tuple
+        self.data = [0,0,0,0,0,0,0,0] #8 spaces array
         self.position = 0
 
     def enqueue(self, data):
@@ -21,6 +20,7 @@ q1 = Queue()
 q1.enqueue(10)        
 q1.enqueue(20)   
 q1.enqueue(30)  
+
 q1.printQueue()  
 q1.dequeue()
 print("----------------")
