@@ -91,20 +91,18 @@ void deleteAtIndex(Node** head, int index){
     }
 }
 
-// Invertir la lista (versión con doble puntero y función void)
-void reverseList(Node **head) {
-    Node *prev = NULL;
-    Node *curr = *head;
-    Node *next = NULL;
-
-    while (curr != NULL) {
-        next = curr->next;   // Guardar el siguiente nodo
-        curr->next = prev;   // Invertir el enlace
-        prev = curr;         // Avanzar prev
-        curr = next;         // Avanzar curr
+void reverseList(Node** head){
+    Node* prev = NULL;
+    Node* curr = *head;
+    Node* next = NULL;
+    
+    while(curr != NULL){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
     }
-
-    *head = prev; // Actualizar el puntero head en el main
+    *head = prev;
 }
 
 //Main
