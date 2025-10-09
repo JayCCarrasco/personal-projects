@@ -1,114 +1,87 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
 typedef struct Node{
     int data;
     struct Node* next;
-} Node;
+}Node;
 
-void addBegin(int data, Node** head){
-    Node* newP = malloc(sizeof(Node));
-    if (newP == NULL){
-        printf("Error: Dynamic allocation failed.\n");       
-    }
-    newP->data = data;
-    newP->next = *head; //El siguiente nodo a newP es al que apuntaba head
-    *head = newP;   //El head real apunta a newP **head es el puntero del puntero head real, no son lo mismo
+Node* createNode(int data){
+
+    Node* node = malloc(sizeof(Node));
+    node->data = data;
+    node->next = NULL;
+
+    return node;
+}
+
+void addNode(Node** head, int data){
+    Node* node = createNode(data);
+
+    if (*head == NULL){
+        *head = node;
+    } else {
+        node->next = *head;
+        *head = node;
+    }  
 }
 
 void deleteNode(Node** head){
-    Node* current = *head;
-
-    if (head == NULL){
-        printf("List is already empty.");
+    Node* deleteNode = *head;
+    if(*head == NULL){
+        printf("List is empty\n");
+    }else{
+        *head = (*head)->next;
     }
-
-    *head = current->next;
-    free(current);
-}
-
-
-
-int main(){
-    Node* head = malloc(sizeof(Node));
-    Node* temp = head;
-    int headDeclared = 0;
-    int size = 0;
-    int exit = 1;
-    int option = 0;
-    if (head == NULL){
-        printf("Error: Dynamic allocation failed.\n");
-    }
-    int data = 0;
-    printf("Insert the first value of the linked list: \n");
     
 
-    while (exit != 0){
+    free(deleteNode);
 
-        printf("Please, select the operation\n");
-        printf("1: Insert values in the array.\n");
-        printf("2: Check if array is empty\n");
-        printf("3: Delete\n");
-        printf("0: Exit\n");
-        scanf("%d", &option);
 
-        switch(option) {
-            case 0: 
-                exit = 0; 
-                break;
-            case 1:
-                if (head == NULL) {
-                    head = malloc(sizeof(Node));
-                }
-                if (headDeclared == 0){
-                    printf("Insert the first value for stack: \n");
-                    scanf("%d", &data);
-                    head->data = data;
-                    head->next = NULL;
-                    headDeclared = 1;
-                    break;
-                }
-                printf("Insert next value for the stack: \n");
-                scanf("%d", &data);
-                addBegin(data, &head);
-                break;
-            case 2:
-                if (size == 0){
-                    printf("The list is empty\n");
-                } else {
-                    printf("The list is not empty\n");
-                }
-                break;
-            case 3:
-                deleteNode(&head);
-                break; 
-        }
+}
 
-        if(headDeclared != 0){
+int main(){
+    Node* head = NULL;
+    Node* temp = NULL;
 
-            size = 0;
+    addNode(&head, 1);
+    addNode(&head, 2);
+    addNode(&head, 3);
 
-            temp = head;
-
-            printf("pointer head: %d\n", head->data);
-            
-            while (temp != NULL){
-                printf("%d ", temp->data);
-                temp = temp->next;
-                size++;
-            }
-        
-
-            printf("\n");
-
-            printf("The size of the singly linked list is: %d \n", size);
-        }
-        
-
+    temp = head;
+    while(temp != NULL){
+        printf("%d\n", temp->data);
+        temp = temp->next;
     }
+
+    printf("------------\n");
+
+    deleteNode(&head);
+    temp = head;
+    while(temp != NULL){
+        printf("%d\n", temp->data);
+        temp = temp->next;
+    }
+
+    deleteNode(&head);
+    temp = head;
+    while(temp != NULL){
+        printf("%d\n", temp->data);
+        temp = temp->next;
+    }
+
+    deleteNode(&head);
+    deleteNode(&head);
+    deleteNode(&head);
+    temp = head;
+    while(temp != NULL){
+        printf("%d\n", temp->data);
+        temp = temp->next;
+    }
+
 
     free(head);
     head = NULL;
 
-    return 0;
+
 }
