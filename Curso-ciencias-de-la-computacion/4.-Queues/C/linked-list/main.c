@@ -1,115 +1,76 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-typedef struct Node{
+typedef struct Node {
     int data;
     struct Node* next;
 } Node;
 
-Node* addNode(int data, Node* current){
-    Node* newP  = malloc(sizeof(Node));
-    if (newP == NULL){
-        printf("Error: Dynamic allocation failed.\n");       
-    }
-    newP->data = data;
-    newP->next = NULL;
-    current->next = newP;
+Node* createNode(int data){
+    Node* node = malloc(sizeof(Node));
+    node->data = data;
+    node->next = NULL;
 
-    return newP;
+    return node;
 }
 
-void deleteNode(Node** head){
-    Node* current = *head;
+void addNode (Node** head, Node** tail, int data){
+    Node* node = createNode(data);
 
-    if (head == NULL){
-        printf("List is already empty.");
+    if(*head == NULL){
+        *head = node;
+        *tail = node;
+        //printf("Damos cabeza");
+    } else {
+        (*tail)->next = node;
+        *tail = node;
+
+        //printf("Dando cola");
     }
-
-    *head = current->next;
-    free(current);   
 }
 
+void deleteNode(Node**head, Node** tail){
+    if (*head == NULL) return;  
 
-int main(){
-    Node* head = malloc(sizeof(Node));
+    Node* temp = *head;
+    *head = (*head)->next;
+    free(temp);
+
+    if (*head == NULL) {  
+        *tail = NULL;
+    }
+}
+
+void print(Node* head){
     Node* temp = head;
-    Node* current = head;
-    int headDeclared = 0;
-    int size = 0;
-    int exit = 1;
-    int position = 0;
-    int option = 0;
-    if (head == NULL){
-        printf("Error: Dynamic allocation failed.\n");
+
+    while(temp != NULL){
+        printf(" %d ", temp->data);
+        temp = temp->next;
     }
+
+}
+
+
+int main() {
+    Node* head = NULL;
+    Node* tail = NULL;
     int data = 0;
-    //printf("Insert the first value of the linked list: \n");
-    
 
-    while (exit != 0){
+    addNode(&head, &tail, 10);
+    addNode(&head, &tail, 20);
+    addNode(&head, &tail, 30);
+    print(head);
 
-        printf("Please, select the operation\n");
-        printf("1: Enqueue\n");
-        printf("2: Dequeue\n");
-        printf("0: Exit\n");
-        scanf("%d", &option);
-
-        switch(option) {
-            case 0: 
-                exit = 0; 
-                break;
-            case 1:
-                if (head == NULL) {
-                    head = malloc(sizeof(Node));
-                }
-                if (headDeclared == 0){
-                    printf("Insert the first value for queue: \n");
-                    scanf("%d", &data);
-                    head->data = data;
-                    head->next = NULL;
-                    current = head;
-                    headDeclared = 1;
-                    break;
-                }
-                printf("Insert next value queue: \n");
-                scanf("%d", &data);
-                current = addNode(data, current);
-                break;
-            case 2:
-                deleteNode(&head);
-                break;
-        }
-
-        if (head != NULL){
-            size = 0;
-
-            printf("pointer head: %d\n", head->data);
-
-            temp = head;
-            
-            while (temp != NULL){
-                printf("%d ", temp->data);
-                temp = temp->next;
-                size++;
-            }
-        
-
-            printf("\n");
-
-            printf("The size of the singly linked list is: %d \n", size);
-        } else {
-            headDeclared = 0;
-        }
-        
-
-    }
+    deleteNode(&head, &tail);
+    print(head);
+    deleteNode(&head, &tail);
+    print(head);
+    deleteNode(&head, &tail);
+    print(head);
 
     free(head);
-    head = NULL;
-    free(current);
-    current = NULL;
-    free(temp);
-    temp = NULL;
+    free(tail);
 
     return 0;
 }
