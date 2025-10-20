@@ -1,87 +1,83 @@
-#include<stdio.h>
-#include<stdlib.h>
+//Stack implementation in C
+//By JCPC
 
-typedef struct Node{
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct Node {
     int data;
     struct Node* next;
-}Node;
+} Node;
 
 Node* createNode(int data){
-
     Node* node = malloc(sizeof(Node));
     node->data = data;
     node->next = NULL;
-
     return node;
 }
 
-void addNode(Node** head, int data){
+Node* pushNode (Node* head, int data){
     Node* node = createNode(data);
-
-    if (*head == NULL){
-        *head = node;
-    } else {
-        node->next = *head;
-        *head = node;
-    }  
+    node->next = head;
+    return node;
 }
 
 void deleteNode(Node** head){
-    Node* deleteNode = *head;
+    Node* tmp = *head;
+
     if(*head == NULL){
-        printf("List is empty\n");
-    }else{
-        *head = (*head)->next;
+        printf("Stack is already empty\n");
+        return;
     }
-    
 
-    free(deleteNode);
+    *head = tmp->next;
+    free(tmp);
+}
 
-
+void printStack(Node* head){
+    if(head == NULL){
+        printf("Stack is empty\n");
+        return;
+    }
+    printf("The stack is: ");
+    while(head != NULL){
+        printf(" %d ", head->data);
+        head = head->next;
+    }
+    printf("\n");
 }
 
 int main(){
+
     Node* head = NULL;
-    Node* temp = NULL;
+    int option = -1;
+    bool exit = false;
+    int data = 0;
 
-    addNode(&head, 1);
-    addNode(&head, 2);
-    addNode(&head, 3);
-
-    temp = head;
-    while(temp != NULL){
-        printf("%d\n", temp->data);
-        temp = temp->next;
+    while(exit == false){
+        printf("Choose option\n");
+        printf("0: Exit\n");
+        printf("1: Push\n");
+        printf("2: Delete\n");
+        printf("3: Print\n");
+        scanf("%d", &option);
+        switch(option){
+            case 0:
+                exit = true;
+                break;
+            case 1:
+                printf("Select data: ");
+                scanf("%d", &data);
+                head = pushNode(head, data);
+                break;
+            case 2:
+                deleteNode(&head);
+                break;
+            case 3:
+                printStack(head);
+                break;
+        }
     }
-
-    printf("------------\n");
-
-    deleteNode(&head);
-    temp = head;
-    while(temp != NULL){
-        printf("%d\n", temp->data);
-        temp = temp->next;
-    }
-
-    deleteNode(&head);
-    temp = head;
-    while(temp != NULL){
-        printf("%d\n", temp->data);
-        temp = temp->next;
-    }
-
-    deleteNode(&head);
-    deleteNode(&head);
-    deleteNode(&head);
-    temp = head;
-    while(temp != NULL){
-        printf("%d\n", temp->data);
-        temp = temp->next;
-    }
-
-
-    free(head);
-    head = NULL;
-
-
+    return 0;
 }
