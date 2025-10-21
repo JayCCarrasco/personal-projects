@@ -6,12 +6,10 @@ class Node: #class node
 class LinkedList:   #class linked list
     def __init__(self):     #constructor with the head
         self.head = None    #initialize head to None 
-        self.size = 0   #linked list initial value = 0
 
     def insertBeg(self, data):  #method for insert node at the beginning. pass data as argument
         node = Node(data, self.head)    #creates a node 
         self.head = node    #as it is been inserted at the beginning, the new node is now the head
-        self.size += 1
 
     
     def print(self):
@@ -26,7 +24,7 @@ class LinkedList:   #class linked list
         print(llstr)
     
     def isEmpty(self):
-        if self.size == 0:
+        if self.head is None:
             print("List is empty")
         else:
             print("List is not empty")
@@ -38,7 +36,6 @@ class LinkedList:   #class linked list
 
         self.head = itr.next
         itr = None
-        self.size -= 1
         return
     
 
