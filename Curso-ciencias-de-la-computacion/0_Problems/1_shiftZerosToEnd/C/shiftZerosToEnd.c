@@ -12,8 +12,7 @@ void shift_zeros_to_end(int* array){
             array[i] = array[count];
             array[count] = temp;
             count++;
-        }
-        
+        }       
     }
 }
 

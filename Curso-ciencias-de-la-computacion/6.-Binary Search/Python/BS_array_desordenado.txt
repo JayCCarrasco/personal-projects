@@ -1,0 +1,1 @@
+Es sencillo, simplemente usar el método array.sort() para ordenar el array de menor a mayor.

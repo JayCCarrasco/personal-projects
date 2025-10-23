@@ -1,0 +1,6 @@
+In python, hash tables are most commonly implemented using dictionaries(dict)
+and set (set). Both rely on hashing under the hood to provide average O(1) time
+complexity for lookups, insertions and deletions.
+So you do not have to worry about implementing hash functions, neither lookup,
+insertion and deletion functions as you would do in other languages as C,
+because python do that for you. 
