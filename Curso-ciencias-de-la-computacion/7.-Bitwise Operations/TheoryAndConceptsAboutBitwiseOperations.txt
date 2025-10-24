@@ -1,0 +1,5 @@
+BITWISE OPERATIONS CONCEPTS
+
+1) BRANCHING
+Code use CONDITIONAL BRANCHES, like if, else, etc.
+The CPU has to decide what branch to take.

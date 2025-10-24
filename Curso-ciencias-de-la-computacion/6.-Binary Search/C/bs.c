@@ -1,3 +1,6 @@
+//Binary search algorithm in C
+//By JCPC
+
 #include <stdio.h>
 #include <stdbool.h>
 
