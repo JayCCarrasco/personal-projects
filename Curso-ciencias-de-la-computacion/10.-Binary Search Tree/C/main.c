@@ -57,7 +57,6 @@ void breadthFirstSearch(Node* node){
             enqueue( current->right, &front, &rear);
         }
     }
-
 }
 
 Node* createNode(int data){

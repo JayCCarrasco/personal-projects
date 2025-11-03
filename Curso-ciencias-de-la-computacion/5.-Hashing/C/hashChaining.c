@@ -65,7 +65,7 @@ bool hash_table_insert(person* p){
 person* hash_table_lookup(char* name){
     int index = hash(name);
     person* tmp = hash_table[index];
-    if(tmp != NULL && strncmp(name, tmp->name, MAX_NAME)){
+    if(tmp != NULL && strncmp(name, tmp->name, MAX_NAME)){	//strncmp returns 0 in case name == tmp->name in the first MAX_NAME characters
         tmp = tmp->next;
     }
     return tmp;
@@ -88,10 +88,6 @@ person* hash_table_delete(char* name){
     }
     return tmp;
 }
-
-
-
-
 
 //main
 int main(){
