@@ -5,17 +5,12 @@ def selectionSort(array):
     for i in range(0, len(array)):
         min = i
         for j in range(i, len(array)):
-            print(j)
             if array[j] < array[min]:
                 min = j
         array[i], array[min] = array[min], array[i]
-        print(array)
-
-    return array
 
 def main():
-    array = [7, 3, 9, 5]
-
+    array = [3, 5, 1, 9, 6, 17, 7, 89, 0]
     array = selectionSort(array)
     print(array)
 

@@ -4,7 +4,7 @@
 #Average: O(n^2)
 
 def insertSort(array):
-    for i in range(1, len(array)-1):
+    for i in range(1, len(array)):
         key = array[i]
         j = i-1
         

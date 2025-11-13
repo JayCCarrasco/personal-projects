@@ -3,14 +3,14 @@
 #time complexity average and best case: O(nlogn) worst case: O(n^2)
 
 def quicksort(arr, low, high):
-    if low < high:
+    if low < high:  #condition so stop the recursion 
         pi = partition(arr, low, high)
 
         quicksort(arr, low, pi-1)
         quicksort(arr, pi+1, high)
 
 def partition(arr, low, high):
-    pivot = arr[high]
+    pivot = arr[high]   #take the last value as the pivot
 
     i = low-1
 
