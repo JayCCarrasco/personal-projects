@@ -49,7 +49,6 @@ void breadthFirstSearch(Node* root){
         if (current->right){
             enqueue(&front, &rear, current->right);
         }
-
     }
 }
 
