@@ -139,10 +139,8 @@ public:
 
     void deleteNode(int value){
         deleteNode(root, value);
-    }
-    
+    }   
 };
-
 
 int main(){
     BST tree;
