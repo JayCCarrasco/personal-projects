@@ -11,6 +11,7 @@ set(SOURCES
     src/main.cpp
     src/sensor.cpp
     src/temperatureSensor.cpp
+    src/lightSensor.cpp
 )
 
 add_executable(sensorProject ${SOURCES})

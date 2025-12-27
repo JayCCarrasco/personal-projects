@@ -1,0 +1,3 @@
+C:/Users/JuanCarlos/Desktop/Organización/Caminos profesionales/Empresa programación/Github/personal-projects/Projects/CPP/sensorProject/build/CMakeFiles/sensorProject.dir
+C:/Users/JuanCarlos/Desktop/Organización/Caminos profesionales/Empresa programación/Github/personal-projects/Projects/CPP/sensorProject/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/JuanCarlos/Desktop/Organización/Caminos profesionales/Empresa programación/Github/personal-projects/Projects/CPP/sensorProject/build/CMakeFiles/ZERO_CHECK.dir
